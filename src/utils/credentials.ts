@@ -8,3 +8,13 @@ export async function readCredentials(): Promise<Credential[]> {
   console.log(credentials);
   return credentials;
 }
+export async function getCredential(service: string): Promise<Credential> {
+  const credentials = await readCredentials();
+  const credential = credentials.find(
+    (credential) => credential.service === service
+  );
+  if (!credential) {
+    throw new Error(`HahaHA !!!!: ${service}`);
+  }
+  return credential;
+}
