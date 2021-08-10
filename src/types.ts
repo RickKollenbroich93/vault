@@ -3,11 +3,9 @@ export type DB = {
 };
 
 export type Credential = {
-  credentials: [
-    {
-      service: string;
-      username: string;
-      password: string;
-    }
-  ];
+  credentials: {
+    service: string;
+    username: string;
+    password: string;
+  };
 };
