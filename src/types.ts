@@ -1,8 +1,8 @@
 export type DB = {
-  credentials: credential[];
+  credentials: Credential[];
 };
 
-export type credential = {
+export type Credential = {
   credentials: [
     {
       service: string;
