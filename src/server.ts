@@ -1,13 +1,29 @@
-import { getCredential, readCredentials } from './utils/credentials';
-
-// console.log('Hello server !!!!!!');
-
-// readCredentials();
+import {
+  addCredential,
+  deleteCredential,
+  getCredential,
+  readCredentials,
+} from './utils/credentials';
 import express from 'express';
-import { DB } from './types';
+import { Credential } from './types';
 
 const app = express();
 const port = 3000;
+
+app.use(express.json());
+
+app.delete('/api/credentials/:service', async (request, response) => {
+  const { service } = request.params;
+  await deleteCredential(service);
+  response.status(200);
+});
+
+app.post('/api/credentials', async (request, response) => {
+  const credential: Credential = request.body;
+  await addCredential(credential);
+  addCredential(credential);
+  response.status(200);
+});
 
 app.get('/api/credentials/:service', async (request, response) => {
   const { service } = request.params;

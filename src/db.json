@@ -1,7 +1,24 @@
 {
   "credentials": [
-    { "service": "Google", "username": "Joe", "password": "12345" },
-    { "service": "ICQ", "username": "Joe", "password": "12345" },
-    { "service": "FaceBook", "username": "Joe", "password": "12345" }
+    {
+      "service": "Google",
+      "username": "Joe",
+      "password": "12345"
+    },
+    {
+      "service": "ICQ",
+      "username": "Joe",
+      "password": "12345"
+    },
+    {
+      "service": "FaceBook",
+      "username": "Joe",
+      "password": "12345"
+    },
+    {
+      "service": "Goog",
+      "username": "Joe",
+      "password": "12345"
+    }
   ]
 }
