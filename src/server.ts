@@ -1,4 +1,4 @@
-import { readCredentials } from './utils/credentials';
+import { getCredential, readCredentials } from './utils/credentials';
 
 // console.log('Hello server !!!!!!');
 
@@ -9,9 +9,25 @@ import { DB } from './types';
 const app = express();
 const port = 3000;
 
+app.get('/api/credentials/:service', async (request, response) => {
+  const { service } = request.params;
+  try {
+    const credential = await getCredential(service);
+    response.status(200).send(credential);
+  } catch (error) {
+    console.error(error);
+    response.status(404).send(`Service: ${service} Not Found`);
+  }
+});
+
 app.get('/api/credentials', async (_req, res) => {
-  const passwords = await readCredentials();
-  res.status(200).send(passwords);
+  try {
+    const passwords = await readCredentials();
+    res.status(200).send(passwords);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal server Error');
+  }
 });
 
 app.get('/', (_req, res) => {
