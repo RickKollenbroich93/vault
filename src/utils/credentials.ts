@@ -49,3 +49,19 @@ function overWriteDB(db: DB) {
   });
   return true;
 }
+
+export async function updateCredential(
+  service: string,
+  credential: Credential
+): Promise<void> {
+  //   Quick and Drity
+  //   await deleteCredential(service);
+  //   await addCredential(credential);
+
+  const credentials = await readCredentials();
+  const filteredCredential = credentials.filter(
+    (credential) => credential.service.toLowerCase() !== service.toLowerCase()
+  );
+  const newDB: DB = { credentials: [...filteredCredential, credential] };
+  await overWriteDB(newDB);
+}
