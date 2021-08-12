@@ -1,0 +1,33 @@
+### Get all credentials
+GET http://localhost:3000/api/credentials
+
+### Get single credential
+GET http://localhost:3000/api/credentials/facebook
+
+### ADD single credential
+POST http://localhost:3000/api/credentials
+Content-Type: application/json
+
+{
+    "service": "Blub",
+    "username": "Rick",
+    "password": "12345678"
+}
+
+### Delete single credential
+DELETE http://localhost:3000/api/credentials/blub
+
+### Delete single credential
+DELETE http://localhost:3000/api/credentials/keinplan
+
+### Update single credential
+
+PUT http://localhost:3000/api/credentials/blub
+Content-Type: application/json
+
+{
+    "service": "KeinPlan",
+    "username": "Rick kollenbroich",
+    "password": "12345678"
+}
+
