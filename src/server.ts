@@ -5,7 +5,7 @@ import {
   readCredentials,
   updateCredential,
 } from './utils/credentials';
-import express, { response } from 'express';
+import express from 'express';
 import { Credential } from './types';
 
 const app = express();
