@@ -1,12 +1,10 @@
-import { readFile } from 'fs/promises';
 import { Credential, DB } from '../types';
-import fs from 'fs';
+import { readFile, writeFile } from 'fs/promises';
 
 export async function readCredentials(): Promise<Credential[]> {
   const response = await readFile('src/db.json', 'utf-8');
   const db: DB = JSON.parse(response);
   const credentials = db.credentials;
-  console.log(credentials);
   return credentials;
 }
 export async function getCredential(service: string): Promise<Credential> {
@@ -27,10 +25,6 @@ export async function deleteCredential(service: string): Promise<void> {
   const db: DB = { credentials: filteredCredentials };
   overWriteDB(db);
 }
-//const credentials = await readCredentials();
-//const newCredentials=[...credentials,credential]
-//const newDB:DB={credentials:newCredentials,}
-//await writeFile('src/db.json', JSON.stringify(newDB, null, 2));
 
 export async function addCredential(credential: Credential): Promise<void> {
   const response = await readFile('src/db.json', 'utf-8');
@@ -38,26 +32,15 @@ export async function addCredential(credential: Credential): Promise<void> {
   db.credentials = [...db.credentials, credential];
   overWriteDB(db);
 }
-function overWriteDB(db: DB) {
+async function overWriteDB(db: DB) {
   const dbString = JSON.stringify(db, null, 2);
-  fs.writeFile('src/db.json', dbString, (err) => {
-    if (err) {
-      console.error(err);
-      return false;
-    }
-    return true;
-  });
-  return true;
+  await writeFile('src/db.json', dbString);
 }
 
 export async function updateCredential(
   service: string,
   credential: Credential
 ): Promise<void> {
-  //   Quick and Drity
-  //   await deleteCredential(service);
-  //   await addCredential(credential);
-
   const credentials = await readCredentials();
   const filteredCredential = credentials.filter(
     (credential) => credential.service.toLowerCase() !== service.toLowerCase()

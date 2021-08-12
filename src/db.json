@@ -19,11 +19,6 @@
       "service": "Goog",
       "username": "Joe",
       "password": "12345"
-    },
-    {
-      "service": "KeinPlan",
-      "username": "Rick kollenbroich",
-      "password": "12345678"
     }
   ]
 }

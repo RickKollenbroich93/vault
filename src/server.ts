@@ -17,7 +17,7 @@ app.put('/api/credentials/:service', async (request, response) => {
   const { service } = request.params;
   const credential: Credential = request.body;
   try {
-    updateCredential(service, credential);
+    await updateCredential(service, credential);
     response.status(200).json(credential);
   } catch (error) {
     console.error(error);
