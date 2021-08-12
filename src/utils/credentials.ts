@@ -1,6 +1,6 @@
 import { Credential, DB } from '../types';
 import { readFile, writeFile } from 'fs/promises';
-import CryptoJS from 'crypto-js';
+import { deCrypt, enCript } from './crypto';
 
 export async function readCredentials(): Promise<Credential[]> {
   const response = await readFile('src/db.json', 'utf-8');
@@ -13,10 +13,11 @@ export async function getCredential(service: string): Promise<Credential> {
   const credential = credentials.find(
     (credential) => credential.service.toLowerCase() === service.toLowerCase()
   );
+
   if (!credential) {
     throw new Error(`ERROR, NO such Service WuuuUHahaHA !!!: ${service}`);
   }
-  return credential;
+  return deCrypt(credential);
 }
 export async function deleteCredential(service: string): Promise<void> {
   const credentials = await readCredentials();
@@ -26,24 +27,10 @@ export async function deleteCredential(service: string): Promise<void> {
   const db: DB = { credentials: filteredCredentials };
   overWriteDB(db);
 }
-
-export async function addCredential(credential: Credential): Promise<void> {
-  const response = await readFile('src/db.json', 'utf-8');
-  const cryptoPassword = CryptoJS.TripleDES.encrypt(
-    credential.password,
-    'HASHcookie'
-  ).toString();
-  console.log(cryptoPassword);
-  credential.password = cryptoPassword;
-  const db: DB = JSON.parse(response);
-  db.credentials = [...db.credentials, credential];
-  overWriteDB(db);
-}
 async function overWriteDB(db: DB) {
   const dbString = JSON.stringify(db, null, 2);
   await writeFile('src/db.json', dbString);
 }
-
 export async function updateCredential(
   service: string,
   credential: Credential
@@ -52,6 +39,14 @@ export async function updateCredential(
   const filteredCredential = credentials.filter(
     (credential) => credential.service.toLowerCase() !== service.toLowerCase()
   );
-  const newDB: DB = { credentials: [...filteredCredential, credential] };
+  const newDB: DB = {
+    credentials: [...filteredCredential, enCript(credential)],
+  };
   await overWriteDB(newDB);
+}
+export async function addCredential(credential: Credential): Promise<void> {
+  const response = await readFile('src/db.json', 'utf-8');
+  const db: DB = JSON.parse(response);
+  db.credentials = [...db.credentials, enCript(credential)];
+  overWriteDB(db);
 }

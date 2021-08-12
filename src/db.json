@@ -19,6 +19,11 @@
       "service": "Goog",
       "username": "Joe",
       "password": "12345"
+    },
+    {
+      "service": "KeinPlan",
+      "username": "Rick kollenbroich",
+      "password": "U2FsdGVkX18e5NIgRG0bIV9OHFI/6PWWmLHEtgwwmJw="
     }
   ]
 }
