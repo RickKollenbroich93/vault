@@ -10,6 +10,11 @@ import { Credential } from './types';
 import { validateMasterPassword } from './utils/valid';
 import dotenv from 'dotenv';
 dotenv.config();
+import { connectDatabase } from './utils/database';
+
+if (!process.env.MONGODB_URL) {
+  throw new Error('No MONGODB_URL dotenv variable');
+}
 
 const app = express();
 const port = 3000;
@@ -105,6 +110,8 @@ app.get('/', (_req, res) => {
   res.send('Hello World! Was geht ich bin dein SERVER!');
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+connectDatabase(process.env.MONGODB_URL).then(() => {
+  app.listen(port, () => {
+    console.log(`Server is listening on port ${port}! 🚀`);
+  });
 });
