@@ -1,14 +1,14 @@
 {
   "credentials": [
     {
-      "service": "KeinPlan",
-      "username": "Rick kollenbroich",
-      "password": "U2FsdGVkX18e5NIgRG0bIV9OHFI/6PWWmLHEtgwwmJw="
+      "service": "Google",
+      "username": "Rick Kollebroich",
+      "password": "U2FsdGVkX1/FnPHstU2/3L4+B/yRJePVkR/KZL27zy8="
     },
     {
       "service": "Blub",
-      "username": "Rick",
-      "password": "U2FsdGVkX1+iFvOV2RHYr74ODchCu09Yj9bGGVcQG+M="
+      "username": "Rick kollenbroich",
+      "password": "U2FsdGVkX199+P1Hf2aZhxrI3TNIkqEoYj7sJbURNCk="
     }
   ]
 }
