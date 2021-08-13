@@ -1,7 +1,10 @@
 import CryptoJS from 'crypto-js';
 import { Credential } from '../types';
 
-export function deCrypt(credential: Credential, key: string): Credential {
+export function decryptCredential(
+  credential: Credential,
+  key: string
+): Credential {
   const deCryptPassword = CryptoJS.TripleDES.decrypt(
     credential.password,
     key
@@ -13,7 +16,10 @@ export function deCrypt(credential: Credential, key: string): Credential {
   return partiallyDeCryptedCredential;
 }
 
-export function enCript(credential: Credential, key: string): Credential {
+export function encryptCredential(
+  credential: Credential,
+  key: string
+): Credential {
   const cryptoPassword = CryptoJS.TripleDES.encrypt(
     credential.password,
     key
