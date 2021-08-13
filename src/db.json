@@ -2,23 +2,13 @@
   "credentials": [
     {
       "service": "Google",
-      "username": "Joe",
-      "password": "12345"
+      "username": "Rick Kollebroich",
+      "password": "U2FsdGVkX1/FnPHstU2/3L4+B/yRJePVkR/KZL27zy8="
     },
     {
-      "service": "ICQ",
-      "username": "Joe",
-      "password": "12345"
-    },
-    {
-      "service": "FaceBook",
-      "username": "Joe",
-      "password": "12345"
-    },
-    {
-      "service": "Goog",
-      "username": "Joe",
-      "password": "12345"
+      "service": "Blub",
+      "username": "Rick kollenbroich",
+      "password": "U2FsdGVkX199+P1Hf2aZhxrI3TNIkqEoYj7sJbURNCk="
     }
   ]
 }

@@ -1,18 +1,36 @@
 ### Get all credentials
 GET http://localhost:3000/api/credentials
+Authorization:{{$dotenv MASTERPASSWORD}}
 
 ### Get single credential
-GET http://localhost:3000/api/credentials/facebook
+GET http://localhost:3000/api/credentials/keinplan
+Authorization:{{$dotenv MASTERPASSWORD}}
+
+### Get single DeCrypt credential
+GET http://localhost:3000/api/credentials/blub
+Authorization:{{$dotenv MASTERPASSWORD}}
 
 ### ADD single credential
 POST http://localhost:3000/api/credentials
+Authorization:{{$dotenv MASTERPASSWORD}}
 Content-Type: application/json
 
 {
     "service": "Blub",
     "username": "Rick",
-    "password": "12345678"
+    "password": "COokiees"
 }
+### ADD another single credential
+POST http://localhost:3000/api/credentials
+Authorization:{{$dotenv MASTERPASSWORD}}
+Content-Type: application/json
+
+{
+    "service": "Google",
+    "username": "Rick Kollebroich",
+    "password": "HASHcookie"
+}
+
 
 ### Delete single credential
 DELETE http://localhost:3000/api/credentials/blub
@@ -23,11 +41,12 @@ DELETE http://localhost:3000/api/credentials/keinplan
 ### Update single credential
 
 PUT http://localhost:3000/api/credentials/blub
+Authorization:{{$dotenv MASTERPASSWORD}}
 Content-Type: application/json
 
 {
-    "service": "KeinPlan",
+    "service": "Blub",
     "username": "Rick kollenbroich",
-    "password": "12345678"
+    "password": "AlteSau93"
 }
 

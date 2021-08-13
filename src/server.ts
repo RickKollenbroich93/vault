@@ -7,6 +7,9 @@ import {
 } from './utils/credentials';
 import express from 'express';
 import { Credential } from './types';
+import { validateMasterPassword } from './utils/valid';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const app = express();
 const port = 3000;
@@ -16,8 +19,16 @@ app.use(express.json());
 app.put('/api/credentials/:service', async (request, response) => {
   const { service } = request.params;
   const credential: Credential = request.body;
+  const masterPassword = request.headers.authorization;
+  if (!masterPassword) {
+    response.status(400).send('Authorization header missing');
+    return;
+  } else if (!(await validateMasterPassword(masterPassword))) {
+    response.status(401).send('Unauthorized request');
+    return;
+  }
   try {
-    await updateCredential(service, credential);
+    await updateCredential(service, credential, masterPassword);
     response.status(200).json(credential);
   } catch (error) {
     console.error(error);
@@ -27,20 +38,44 @@ app.put('/api/credentials/:service', async (request, response) => {
 
 app.delete('/api/credentials/:service', async (request, response) => {
   const { service } = request.params;
+  const masterPassword = request.headers.authorization;
+  if (!masterPassword) {
+    response.status(400).send('Authorization header missing');
+    return;
+  } else if (!(await validateMasterPassword(masterPassword))) {
+    response.status(401).send('Unauthorized request');
+    return;
+  }
   await deleteCredential(service);
   response.status(200);
 });
 
 app.post('/api/credentials', async (request, response) => {
   const credential: Credential = request.body;
-  await addCredential(credential);
-  response.status(200);
+  const masterPassword = request.headers.authorization;
+  if (!masterPassword) {
+    response.status(400).send('Authorization header missing');
+    return;
+  } else if (!(await validateMasterPassword(masterPassword))) {
+    response.status(401).send('Unauthorized request');
+    return;
+  }
+  await addCredential(credential, masterPassword);
+  return response.status(200).send(credential);
 });
 
 app.get('/api/credentials/:service', async (request, response) => {
   const { service } = request.params;
+  const masterPassword = request.headers.authorization;
+  if (!masterPassword) {
+    response.status(400).send('Authorization header missing');
+    return;
+  } else if (!(await validateMasterPassword(masterPassword))) {
+    response.status(401).send('Unauthorized request');
+    return;
+  }
   try {
-    const credential = await getCredential(service);
+    const credential = await getCredential(service, masterPassword);
     response.status(200).send(credential);
   } catch (error) {
     console.error(error);
@@ -48,7 +83,15 @@ app.get('/api/credentials/:service', async (request, response) => {
   }
 });
 
-app.get('/api/credentials', async (_req, res) => {
+app.get('/api/credentials', async (req, res) => {
+  const masterPassword = req.headers.authorization;
+  if (!masterPassword) {
+    res.status(400).send('Authorization header missing');
+    return;
+  } else if (!(await validateMasterPassword(masterPassword))) {
+    res.status(401).send('Unauthorized request');
+    return;
+  }
   try {
     const passwords = await readCredentials();
     res.status(200).send(passwords);
