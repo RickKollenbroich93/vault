@@ -1,29 +1,14 @@
 {
   "credentials": [
     {
-      "service": "Google",
-      "username": "Joe",
-      "password": "12345"
-    },
-    {
-      "service": "ICQ",
-      "username": "Joe",
-      "password": "12345"
-    },
-    {
-      "service": "FaceBook",
-      "username": "Joe",
-      "password": "12345"
-    },
-    {
-      "service": "Goog",
-      "username": "Joe",
-      "password": "12345"
-    },
-    {
       "service": "KeinPlan",
       "username": "Rick kollenbroich",
       "password": "U2FsdGVkX18e5NIgRG0bIV9OHFI/6PWWmLHEtgwwmJw="
+    },
+    {
+      "service": "Blub",
+      "username": "Rick",
+      "password": "U2FsdGVkX1+iFvOV2RHYr74ODchCu09Yj9bGGVcQG+M="
     }
   ]
 }

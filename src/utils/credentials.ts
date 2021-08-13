@@ -2,17 +2,20 @@ import { Credential, DB } from '../types';
 import { readFile, writeFile } from 'fs/promises';
 import { deCrypt, enCript } from './crypto';
 
-export async function readCredentials(): Promise<Credential[]> {
+export async function readCredentials(key: string): Promise<Credential[]> {
   const response = await readFile('src/db.json', 'utf-8');
   const db: DB = JSON.parse(response);
-  const credentials = db.credentials;
-  return credentials;
+  const credentials: Credential[] = db.credentials;
+  const deCryptCredentials = credentials.map((credential) =>
+    deCrypt(credential, key)
+  );
+  return deCryptCredentials;
 }
 export async function getCredential(
   service: string,
   key: string
 ): Promise<Credential> {
-  const credentials = await readCredentials();
+  const credentials = await readCredentials(key);
   const credential = credentials.find(
     (credential) => credential.service.toLowerCase() === service.toLowerCase()
   );
@@ -20,11 +23,14 @@ export async function getCredential(
   if (!credential) {
     throw new Error(`ERROR, NO such Service WuuuUHahaHA !!!: ${service}`);
   }
-  const deCryptCredential = deCrypt(credential, key);
-  return deCryptCredential;
+  //   const deCryptCredential = deCrypt(credential, key);
+  return credential;
 }
-export async function deleteCredential(service: string): Promise<void> {
-  const credentials = await readCredentials();
+export async function deleteCredential(
+  service: string,
+  key: string
+): Promise<void> {
+  const credentials = await readCredentials(key);
   const filteredCredentials = credentials.filter(
     (credential) => credential.service.toLowerCase() !== service.toLowerCase()
   );
@@ -40,7 +46,7 @@ export async function updateCredential(
   credential: Credential,
   key: string
 ): Promise<void> {
-  const credentials = await readCredentials();
+  const credentials = await readCredentials(key);
   const filteredCredential = credentials.filter(
     (credential) => credential.service.toLowerCase() !== service.toLowerCase()
   );
