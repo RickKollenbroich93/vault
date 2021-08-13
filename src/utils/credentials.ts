@@ -8,7 +8,10 @@ export async function readCredentials(): Promise<Credential[]> {
   const credentials = db.credentials;
   return credentials;
 }
-export async function getCredential(service: string): Promise<Credential> {
+export async function getCredential(
+  service: string,
+  key: string
+): Promise<Credential> {
   const credentials = await readCredentials();
   const credential = credentials.find(
     (credential) => credential.service.toLowerCase() === service.toLowerCase()
@@ -17,7 +20,8 @@ export async function getCredential(service: string): Promise<Credential> {
   if (!credential) {
     throw new Error(`ERROR, NO such Service WuuuUHahaHA !!!: ${service}`);
   }
-  return deCrypt(credential);
+  const deCryptCredential = deCrypt(credential, key);
+  return deCryptCredential;
 }
 export async function deleteCredential(service: string): Promise<void> {
   const credentials = await readCredentials();
@@ -33,20 +37,24 @@ async function overWriteDB(db: DB) {
 }
 export async function updateCredential(
   service: string,
-  credential: Credential
+  credential: Credential,
+  key: string
 ): Promise<void> {
   const credentials = await readCredentials();
   const filteredCredential = credentials.filter(
     (credential) => credential.service.toLowerCase() !== service.toLowerCase()
   );
   const newDB: DB = {
-    credentials: [...filteredCredential, enCript(credential)],
+    credentials: [...filteredCredential, enCript(credential, key)],
   };
   await overWriteDB(newDB);
 }
-export async function addCredential(credential: Credential): Promise<void> {
+export async function addCredential(
+  credential: Credential,
+  key: string
+): Promise<void> {
   const response = await readFile('src/db.json', 'utf-8');
   const db: DB = JSON.parse(response);
-  db.credentials = [...db.credentials, enCript(credential)];
+  db.credentials = [...db.credentials, enCript(credential, key)];
   overWriteDB(db);
 }
