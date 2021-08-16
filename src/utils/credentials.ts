@@ -29,10 +29,16 @@ export async function updateCredential(
   credential: Credential,
   key: string
 ): Promise<void> {
-  const encrptedCredential = encryptCredential(credential, key);
-  const collection = getCredentialCollection();
-  collection.findOneAndReplace({ service }, encrptedCredential);
+  const credentialCollection = getCredentialCollection();
+
+  const encryptedCredential = encryptCredential(credential, key);
+
+  await credentialCollection.updateOne(
+    { service },
+    { $set: encryptedCredential }
+  );
 }
+
 export async function addCredential(
   credential: Credential,
   key: string

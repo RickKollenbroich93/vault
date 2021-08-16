@@ -41,7 +41,7 @@ DELETE http://localhost:3000/api/credentials/keinplan
 
 ### Update single credential
 
-PUT http://localhost:3000/api/credentials/Blub
+PATCH http://localhost:3000/api/credentials/Blub
 Authorization:{{$dotenv MASTERPASSWORD}}
 Content-Type: application/json
 
