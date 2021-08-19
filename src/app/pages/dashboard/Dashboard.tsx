@@ -17,7 +17,7 @@ export default function Dashboard(): JSX.Element {
       <Link className={styles.link} to="/Forgot">
         Passwort vergessen ?
       </Link>
-      <Link className={styles.link} to="/Password/:service">
+      <Link className={styles.link} to="/Password/service">
         Password Controll Center
       </Link>
     </main>
