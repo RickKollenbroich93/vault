@@ -1,6 +1,9 @@
 .container {
   display: grid;
   justify-items: center;
+  align-content: start;
+  height: 100vh;
+  background: rgb(242, 242, 242);
 }
 .actionWrapper {
   display: flex;

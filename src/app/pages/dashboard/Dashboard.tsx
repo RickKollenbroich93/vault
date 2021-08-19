@@ -3,7 +3,7 @@ import styles from './Dashboard.module.css';
 
 export default function Dashboard(): JSX.Element {
   return (
-    <div className={styles.container}>
+    <main className={styles.container}>
       <h1 className={styles.header}>Your Password Vault</h1>
       <div className={styles.actionWrapper}>
         <input
@@ -13,6 +13,6 @@ export default function Dashboard(): JSX.Element {
 
         <button className={styles.subBtn}>Submit</button>
       </div>
-    </div>
+    </main>
   );
 }
