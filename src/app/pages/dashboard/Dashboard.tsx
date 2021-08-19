@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Dashboard.module.css';
+import { Link } from 'react-router-dom';
 
 export default function Dashboard(): JSX.Element {
   return (
@@ -13,6 +14,9 @@ export default function Dashboard(): JSX.Element {
 
         <button className={styles.subBtn}>Submit</button>
       </div>
+      <Link className={styles.link} to="/Forgot">
+        Passwort vergessen ?
+      </Link>
     </main>
   );
 }
