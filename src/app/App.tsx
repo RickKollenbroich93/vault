@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Dashboard from './pages/dashboard/dashboard';
+import Dashboard from './pages/Dashboard/Dashboard';
 
 function App(): JSX.Element {
   return (
