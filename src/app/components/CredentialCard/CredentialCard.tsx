@@ -10,9 +10,9 @@ export default function CredentialCard({
 }: CredentialCardProps): JSX.Element {
   return (
     <div className={styles.usercard}>
-      <p>{credentialData.service}</p>
-      <p>{credentialData.username}</p>
-      <p>{credentialData.password}</p>
+      <p>Service: {credentialData.service}</p>
+      <p>Username: {credentialData.username}</p>
+      <p>Password: {credentialData.password}</p>
       <div className={styles.buttonWrapper}>
         <button className={styles.cardDeleteBtn}>🗑️</button>
         <button className={styles.cardEditBtn}>🖊️</button>
