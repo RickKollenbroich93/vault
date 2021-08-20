@@ -170,7 +170,8 @@
   margin: 1rem;
 }
 .cardWrapper {
-  display: flex;
+  display: grid;
+  padding-bottom: 5%;
 }
 .headerNorma {
   font-size: 4rem;
