@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './Dashboard.module.css';
 import { Link } from 'react-router-dom';
 import type { Credential } from '../../../types';
+import CredentialCard from '../../components/CredentialCard/CredentialCard';
 
 export default function Dashboard(): JSX.Element {
   const [credentials, setCredentials] = useState<Credential[]>([]);
@@ -24,9 +25,7 @@ export default function Dashboard(): JSX.Element {
   }, [masterPassword]);
 
   //   const rerun = true;
-
   //   function styleTimer(rerun: boolean) {
-  //     // do whatever you like here
   //     rerun = false;
 
   //     setTimeout(styleTimer, 10000);
@@ -40,12 +39,12 @@ export default function Dashboard(): JSX.Element {
         <h1 className={styles.header}>Your Password Vault</h1>
 
         {/* <h1
-            className={`${
-              styleTimer() == true ? styles.headerNorma : styles.header
-            }`}
-          >
-            Your Password Vault
-          </h1> */}
+          className={`${
+            styleTimer(rerun) == false ? styles.headerNorma : styles.header
+          }`}
+        >
+          Your Password Vault
+        </h1> */}
       </div>
 
       <form
@@ -78,11 +77,7 @@ export default function Dashboard(): JSX.Element {
       <div className={styles.cardWrapper}>
         {credentials.length !== 0 &&
           credentials.map((credential) => (
-            <div className={styles.usercard}>
-              <p>{credential.service}</p>
-              <p>{credential.username}</p>
-              <p>{credential.password}</p>
-            </div>
+            <CredentialCard credentialData={credential} />
           ))}
       </div>
     </main>
