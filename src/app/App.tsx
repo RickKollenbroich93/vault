@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import AddPage from './pages/AddPage/AddPage';
+import SearchPage from './pages/SearchPage/SearchPage';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Forgot from './pages/Forgot/Forgot';
 import Password from './pages/Password/Password';
@@ -8,6 +10,12 @@ function App(): JSX.Element {
   return (
     <BrowserRouter>
       <Switch>
+        <Route path="/Search">
+          <SearchPage />
+        </Route>
+        <Route path="/Add">
+          <AddPage />
+        </Route>
         <Route path="/Password/:service">
           <Password />
         </Route>
