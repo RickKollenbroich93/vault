@@ -4,7 +4,6 @@ import AddPage from './pages/AddPage/AddPage';
 import SearchPage from './pages/SearchPage/SearchPage';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Forgot from './pages/Forgot/Forgot';
-import Password from './pages/Password/Password';
 
 function App(): JSX.Element {
   return (
@@ -15,9 +14,6 @@ function App(): JSX.Element {
         </Route>
         <Route path="/Add">
           <AddPage />
-        </Route>
-        <Route path="/Password/:service">
-          <Password />
         </Route>
         <Route path="/Forgot">
           <Forgot />
