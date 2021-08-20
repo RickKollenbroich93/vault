@@ -3,6 +3,7 @@ import styles from './Dashboard.module.css';
 import { Link } from 'react-router-dom';
 import type { Credential } from '../../../types';
 import CredentialCard from '../../components/CredentialCard/CredentialCard';
+import Buttons from '../../components/Buttons/Buttons';
 
 export default function Dashboard(): JSX.Element {
   const [credentials, setCredentials] = useState<Credential[]>([]);
@@ -24,29 +25,11 @@ export default function Dashboard(): JSX.Element {
     }
   }, [masterPassword]);
 
-  //   const rerun = true;
-  //   function styleTimer(rerun: boolean) {
-  //     rerun = false;
-
-  //     setTimeout(styleTimer, 10000);
-
-  //     return rerun;
-  //   }
-
   return (
     <main className={styles.container}>
       <div className={styles.h1Wrapper}>
         <h1 className={styles.header}>Your Password Vault</h1>
-
-        {/* <h1
-          className={`${
-            styleTimer(rerun) == false ? styles.headerNorma : styles.header
-          }`}
-        >
-          Your Password Vault
-        </h1> */}
       </div>
-
       <form
         className={styles.actionWrapper}
         onSubmit={(event) => {
@@ -67,7 +50,6 @@ export default function Dashboard(): JSX.Element {
           Submit
         </button>
       </form>
-
       <Link className={styles.link} to="/Forgot">
         Passwort vergessen ?
       </Link>
@@ -80,6 +62,7 @@ export default function Dashboard(): JSX.Element {
             <CredentialCard credentialData={credential} />
           ))}
       </div>
+      <Buttons />
     </main>
   );
 }
