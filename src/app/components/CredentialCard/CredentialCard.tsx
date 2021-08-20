@@ -13,6 +13,10 @@ export default function CredentialCard({
       <p>{credentialData.service}</p>
       <p>{credentialData.username}</p>
       <p>{credentialData.password}</p>
+      <div className={styles.buttonWrapper}>
+        <button className={styles.cardDeleteBtn}>🗑️</button>
+        <button className={styles.cardEditBtn}>🖊️</button>
+      </div>
     </div>
   );
 }
