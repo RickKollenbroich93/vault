@@ -1,42 +1,90 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Dashboard.module.css';
 import { Link } from 'react-router-dom';
+import type { Credential } from '../../../types';
 
 export default function Dashboard(): JSX.Element {
   const [credentials, setCredentials] = useState<Credential[]>([]);
+  const [masterPassword, setMasterPassword] = useState('');
+
+  async function fetchCredentials() {
+    const response = await fetch('/api/credentials', {
+      headers: {
+        Authorization: masterPassword,
+      },
+    });
+    const credentials = await response.json();
+    setCredentials(credentials);
+  }
 
   useEffect(() => {
-    async function fetchCredentials() {
-      const response = await fetch('/api/credentials', {
-        headers: {
-          Authorization: 'HASHcookie',
-        },
-      });
-      const credentials = await response.json();
-      setCredentials(credentials);
+    if (!masterPassword) {
+      setCredentials([]);
     }
-    fetchCredentials();
-  }, []);
+  }, [masterPassword]);
+
+  //   const rerun = true;
+
+  //   function styleTimer(rerun: boolean) {
+  //     // do whatever you like here
+  //     rerun = false;
+
+  //     setTimeout(styleTimer, 10000);
+
+  //     return rerun;
+  //   }
 
   return (
     <main className={styles.container}>
-      <h1 className={styles.header}>Your Password Vault</h1>
-      <div className={styles.actionWrapper}>
+      <div className={styles.h1Wrapper}>
+        <h1 className={styles.header}>Your Password Vault</h1>
+
+        {/* <h1
+            className={`${
+              styleTimer() == true ? styles.headerNorma : styles.header
+            }`}
+          >
+            Your Password Vault
+          </h1> */}
+      </div>
+
+      <form
+        className={styles.actionWrapper}
+        onSubmit={(event) => {
+          event.preventDefault();
+          fetchCredentials();
+        }}
+      >
         <input
           placeholder="MasterPassword"
+          type="password"
           className={styles.inputfield}
+          onChange={(event) => setMasterPassword(event.target.value)}
         ></input>
         {credentials &&
           credentials.forEach((credential) => console.log(credential))}
 
-        <button className={styles.subBtn}>Submit</button>
-      </div>
+        <button type="submit" className={styles.subBtn}>
+          Submit
+        </button>
+      </form>
+
       <Link className={styles.link} to="/Forgot">
         Passwort vergessen ?
       </Link>
       <Link className={styles.link} to="/Password/service">
         Password Controll Center
       </Link>
+      <div className={styles.cardWrapper}>
+        {credentials.length !== 0 &&
+          credentials.map((credential) => (
+            <div className={styles.usercard}>
+              <p>{credential.service}</p>
+              <p>{credential.username}</p>
+              <p>{credential.password}</p>
+            </div>
+          ))}
+      </div>
     </main>
   );
 }
