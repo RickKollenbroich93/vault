@@ -19,11 +19,11 @@
 .subBtn::after {
   width: 10rem;
   font-size: 2rem;
-  background: linear-gradient(45deg, transparent 5%, rgb(199, 199, 199) 5%);
+  background: linear-gradient(315deg, transparent 5%, rgb(199, 199, 199) 5%);
   color: rgb(0, 0, 0);
   border: none;
   letter-spacing: 3px;
-  box-shadow: 6px 0 0 rgb(0, 251, 255);
+  box-shadow: -6px 0 0 rgb(0, 251, 255);
   outline: transparent;
   position: relative;
 }

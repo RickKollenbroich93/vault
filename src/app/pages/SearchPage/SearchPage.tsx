@@ -40,15 +40,17 @@ export default function AddPage(): JSX.Element {
           onChange={(event) => setSearchService(event.target.value)}
         />
         <h4>Enter MasterPassword</h4>
-        <input
-          type="password"
-          placeholder="MasterPassword"
-          onChange={(event) => setMasterPassword(event.target.value)}
-        />
+        <div className={styles.actioWrapper}>
+          <input
+            type="password"
+            placeholder="MasterPassword"
+            onChange={(event) => setMasterPassword(event.target.value)}
+          />
 
-        <button type="submit" className={styles.subBtn}>
-          Search
-        </button>
+          <button type="submit" className={styles.subBtn}>
+            Search
+          </button>
+        </div>
       </form>
       <div className={styles.cardWrapper}>
         {credential && <CredentialCard credentialData={credential} />}

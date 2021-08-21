@@ -1,31 +1,17 @@
-.container {
-  display: grid;
-  justify-items: center;
-  align-content: start;
-  height: 100vh;
-  background: rgb(242, 242, 242);
-}
-.actioWrapper {
-  display: flex;
-  gap: 1.5rem;
-}
-input {
-  font-size: 2rem;
-}
-.subBtn,
-.subBtn::after {
+.backBtn,
+.backBtn::after {
   width: 10rem;
   font-size: 2rem;
-  background: linear-gradient(315deg, transparent 5%, rgb(199, 199, 199) 5%);
+  background: linear-gradient(45deg, transparent 5%, rgb(199, 199, 199) 5%);
   color: rgb(0, 0, 0);
   border: none;
   letter-spacing: 3px;
-  box-shadow: -6px 0 0 rgb(0, 251, 255);
+  box-shadow: 6px 0 0 rgb(0, 251, 255);
   outline: transparent;
   position: relative;
 }
 
-.subBtn::after {
+.backBtn::after {
   --slice-0: inset(50% 50% 50% 50%);
   --slice-1: inset(80% -6px 0 0);
   --slice-2: inset(50% -6px 30% 0);
@@ -51,7 +37,7 @@ input {
   clip-path: var(--slice-0);
 }
 
-.subBtn:hover::after {
+.backBtn:hover::after {
   animation: 1s glitch;
   animation-timing-function: steps(2, end);
 }
