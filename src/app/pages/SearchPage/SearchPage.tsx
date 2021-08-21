@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import type { Credential } from '../../../types';
 import CredentialCard from '../../components/CredentialCard/CredentialCard';
 import styles from './SearchPage.module.css';
+import GlitchHeader from '../../components/GlitchHeader/SearchHeader';
 
 export default function AddPage(): JSX.Element {
   const [credential, setCredential] = useState<Credential | null>();
@@ -26,7 +27,7 @@ export default function AddPage(): JSX.Element {
 
   return (
     <main className={styles.container}>
-      <h1>Search for Service</h1>
+      <GlitchHeader />
       <form
         onSubmit={(event) => {
           event.preventDefault();

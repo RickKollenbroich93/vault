@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './AddPage.module.css';
 import BackButton from '../../components/BackButton/BackButton';
+import GlitchHeader from '../../components/GlitchHeader/AddHeader';
 
 export default function AddPage(): JSX.Element {
   const [masterPassword, setMasterPassword] = useState('');
@@ -28,7 +29,7 @@ export default function AddPage(): JSX.Element {
 
   return (
     <main className={styles.container}>
-      <h1>ADD new Credential</h1>
+      <GlitchHeader />
       <form
         onSubmit={(event) => {
           event.preventDefault();
