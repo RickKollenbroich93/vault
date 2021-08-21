@@ -4,11 +4,15 @@ import AddPage from './pages/AddPage/AddPage';
 import SearchPage from './pages/SearchPage/SearchPage';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Forgot from './pages/Forgot/Forgot';
+import EditPage from './pages/EditPage/EditPage';
 
 function App(): JSX.Element {
   return (
     <BrowserRouter>
       <Switch>
+        <Route path="/Edit">
+          <EditPage />
+        </Route>
         <Route path="/Search">
           <SearchPage />
         </Route>

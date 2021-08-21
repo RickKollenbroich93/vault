@@ -3,20 +3,22 @@
   width: 50px;
   height: 50px;
   border-radius: 30px;
-  background-color: rgba(157, 248, 255, 0.3);
+  background-color: rgba(160, 160, 160, 0.3);
 }
 .searchBtn {
   font-size: 1.5rem;
   width: 50px;
   height: 50px;
   border-radius: 30px;
-  background-color: rgba(157, 248, 255, 0.3);
+  background-color: rgba(160, 160, 160, 0.3);
 }
 .buttonWrapper {
   display: flex;
   width: 100%;
+  background-color: rgba(157, 248, 255, 0.8);
+  border-radius: 30px;
+  padding-top: 10px;
   padding-bottom: 5%;
-  padding-top: 10%;
   padding-left: 15%;
   gap: 70%;
   position: fixed;
