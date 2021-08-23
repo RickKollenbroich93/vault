@@ -23,7 +23,7 @@ export default function CredentialCard({
         >
           🗑️
         </button>
-        <Link to="/Edit">
+        <Link to={`/credential/${credentialData.service}/edit`}>
           <button className={styles.cardEditBtn}>🖊️</button>
         </Link>
       </div>

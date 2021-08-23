@@ -10,7 +10,7 @@ function App(): JSX.Element {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/Edit">
+        <Route path="/credential/:service/edit">
           <EditPage />
         </Route>
         <Route path="/Search">
