@@ -52,7 +52,7 @@ app.delete('/api/credentials/:service', async (request, response) => {
     return;
   }
   await deleteCredential(service);
-  response.status(200);
+  response.status(200).send();
 });
 
 app.post('/api/credentials', async (request, response) => {

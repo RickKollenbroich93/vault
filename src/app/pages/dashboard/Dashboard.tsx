@@ -9,6 +9,18 @@ export default function Dashboard(): JSX.Element {
   const [credentials, setCredentials] = useState<Credential[]>([]);
   const [masterPassword, setMasterPassword] = useState('');
 
+  async function deleteCredential(service: string, masterPassword: string) {
+    await fetch(`/api/credentials/${service}`, {
+      method: 'DELETE',
+      headers: { Authorization: masterPassword },
+    });
+  }
+
+  async function handleDeleteClick(service: string) {
+    await deleteCredential(service, masterPassword);
+    await fetchCredentials();
+  }
+
   async function fetchCredentials() {
     const response = await fetch('/api/credentials', {
       headers: {
@@ -56,7 +68,10 @@ export default function Dashboard(): JSX.Element {
       <div className={styles.cardWrapper}>
         {credentials.length !== 0 &&
           credentials.map((credential) => (
-            <CredentialCard credentialData={credential} />
+            <CredentialCard
+              credentialData={credential}
+              onDeleteClick={handleDeleteClick}
+            />
           ))}
       </div>
       <Buttons />

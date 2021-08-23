@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import styles from './EditPage.module.css';
+import { useHistory, useParams } from 'react-router';
 
-export default function AddPage(): JSX.Element {
+export default function EditPage(): JSX.Element {
+  const history = useHistory();
+  const { service: serviceParam }: { service: string } = useParams();
   const [masterPassword, setMasterPassword] = useState('');
-  const [newService, setNewService] = useState('');
+  const [newService, setNewService] = useState(serviceParam);
   const [newUsername, setNewUsername] = useState('');
   const [newPassword, setNewPassword] = useState('');
 
-  async function addCredential() {
+  async function EditCredential() {
     const newCredential = {
       service: newService,
       username: newUsername,
@@ -22,6 +25,7 @@ export default function AddPage(): JSX.Element {
       },
       body: JSON.stringify(newCredential),
     });
+    history.push('/');
     console.log(await response.json());
   }
 
@@ -31,31 +35,35 @@ export default function AddPage(): JSX.Element {
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          addCredential();
+          EditCredential();
         }}
       >
         <h4>Enter Service you want to Edit</h4>
         <input
           type="text"
           placeholder="Service"
+          value={newService}
           onChange={(event) => setNewService(event.target.value)}
         />
         <h4>Enter new Username</h4>
         <input
           type="text"
           placeholder="Username"
+          value={newUsername}
           onChange={(event) => setNewUsername(event.target.value)}
         />
         <h4>Enter new Password</h4>
         <input
           type="text"
           placeholder="Password"
+          value={newPassword}
           onChange={(event) => setNewPassword(event.target.value)}
         />
         <h4>Enter MasterPassword</h4>
         <input
           type="password"
           placeholder="MasterPassword"
+          value={masterPassword}
           onChange={(event) => setMasterPassword(event.target.value)}
         />
 
