@@ -2,8 +2,15 @@
   display: grid;
   justify-items: center;
   align-content: start;
-  height: 100vh;
   background: rgb(242, 242, 242);
+}
+.pageWrapper {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: end;
+  justify-items: end;
+  padding-left: 9rem;
 }
 .contentWrapper {
   padding-left: 11.9rem;
