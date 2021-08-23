@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Buttons.module.css';
 import { Link } from 'react-router-dom';
 
-export default function Forgot(): JSX.Element {
+export default function Buttons(): JSX.Element {
   return (
     <div className={styles.buttonWrapper}>
       <Link to="/Search">
