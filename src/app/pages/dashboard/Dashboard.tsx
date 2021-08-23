@@ -4,17 +4,11 @@ import { Link } from 'react-router-dom';
 import type { Credential } from '../../../types';
 import CredentialCard from '../../components/CredentialCard/CredentialCard';
 import Buttons from '../../components/Buttons/Buttons';
+import { deleteCredential } from '../../utils/api';
 
 export default function Dashboard(): JSX.Element {
   const [credentials, setCredentials] = useState<Credential[]>([]);
   const [masterPassword, setMasterPassword] = useState('');
-
-  async function deleteCredential(service: string, masterPassword: string) {
-    await fetch(`/api/credentials/${service}`, {
-      method: 'DELETE',
-      headers: { Authorization: masterPassword },
-    });
-  }
 
   async function handleDeleteClick(service: string) {
     await deleteCredential(service, masterPassword);

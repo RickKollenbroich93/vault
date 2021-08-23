@@ -54,7 +54,7 @@ export default function EditPage(): JSX.Element {
         />
         <h4>Enter new Password</h4>
         <input
-          type="text"
+          type="password"
           placeholder="Password"
           value={newPassword}
           onChange={(event) => setNewPassword(event.target.value)}
