@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import styles from './AddPage.module.css';
 import BackButton from '../../components/BackButton/BackButton';
 import GlitchHeader from '../../components/GlitchHeader/AddHeader';
+import { useHistory } from 'react-router';
 
 export default function AddPage(): JSX.Element {
+  const history = useHistory();
+
   const [masterPassword, setMasterPassword] = useState('');
   const [newService, setNewService] = useState('');
   const [newUsername, setNewUsername] = useState('');
@@ -25,6 +28,7 @@ export default function AddPage(): JSX.Element {
       body: JSON.stringify(newCredential),
     });
     console.log(await response.json());
+    history.push('/');
   }
 
   return (

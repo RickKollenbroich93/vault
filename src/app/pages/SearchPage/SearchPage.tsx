@@ -8,6 +8,7 @@ export default function AddPage(): JSX.Element {
   const [credential, setCredential] = useState<Credential | null>();
   const [masterPassword, setMasterPassword] = useState('');
   const [searchService, setSearchService] = useState('');
+  const [isError, setIsError] = useState<boolean>(false);
 
   async function findCredential() {
     const response = await fetch(`/api/credentials/${searchService}`, {
@@ -15,6 +16,12 @@ export default function AddPage(): JSX.Element {
         Authorization: masterPassword,
       },
     });
+    if (!response.ok) {
+      setIsError(true);
+      console.log('Credential not Found');
+      return;
+    }
+    setIsError(false);
     const credential = await response.json();
     setCredential(credential);
   }
@@ -56,6 +63,7 @@ export default function AddPage(): JSX.Element {
       <div className={styles.cardWrapper}>
         {credential && <CredentialCard credentialData={credential} />}
       </div>
+      {isError && <p>Something went wrong</p>}
     </main>
   );
 }
