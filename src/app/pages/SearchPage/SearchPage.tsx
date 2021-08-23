@@ -3,6 +3,7 @@ import type { Credential } from '../../../types';
 import CredentialCard from '../../components/CredentialCard/CredentialCard';
 import styles from './SearchPage.module.css';
 import GlitchHeader from '../../components/GlitchHeader/SearchHeader';
+import { deleteCredential } from '../../utils/api';
 
 export default function AddPage(): JSX.Element {
   const [credential, setCredential] = useState<Credential | null>();
@@ -25,7 +26,11 @@ export default function AddPage(): JSX.Element {
     const credential = await response.json();
     setCredential(credential);
   }
-
+  async function handleDeleteClick(service: string) {
+    await deleteCredential(service, masterPassword);
+    setCredential(null);
+    setIsError(false);
+  }
   useEffect(() => {
     if (!masterPassword) {
       setCredential(null);
@@ -61,7 +66,12 @@ export default function AddPage(): JSX.Element {
         </div>
       </form>
       <div className={styles.cardWrapper}>
-        {credential && <CredentialCard credentialData={credential} />}
+        {credential && (
+          <CredentialCard
+            credentialData={credential}
+            onDeleteClick={handleDeleteClick}
+          />
+        )}
       </div>
       {isError && <p>Something went wrong</p>}
     </main>
